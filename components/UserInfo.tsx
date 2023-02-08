@@ -1,23 +1,33 @@
-import { Avatar, Box, Flex, Link, Text } from "@chakra-ui/react";
+import { Avatar, Box, Container, Text, useMediaQuery } from "@chakra-ui/react";
+import { useEffect } from "react";
+import CardRepo from "./CardRepo";
 
 const UserInfo = ({ user }: any) => {
-  console.log(user);
+  const isMedia = useMediaQuery('(max-width: 500px)')
+  
   return (
-    <Box
-      width='max-content'
-      margin='0 auto'
-      display='flex'
-      flexDirection='column'
-      alignItems='center'
-    >
-      <Avatar size='2xl' name={user.name && user.login} src={user.avatarUrl} />
-      <Text fontWeight='bold'>{user.login}</Text>
-      <Flex display='flex' flexDirection='column'>
+    <Container gap='1%' padding='0' maxWidth='70vw' display={isMedia[0] ? 'block' : 'flex'} >
+      <Box display='flex' flexDirection='column' alignItems='center'>
+        <Avatar
+          size='2xl'
+          name={user.name && user.login}
+          src={user.avatarUrl}
+        />
+        <Text fontWeight='bold'>{user.login}</Text>
+      </Box>
+
+      <Box
+        display='flex'
+        flexDirection='column'
+        alignItems='center'
+        gap='5'
+        width='100%'
+      >
         {user.repositories.nodes.map((item: any) => (
-          <Link key={item.name} href={item.url}>{item.name}</Link>
+          <CardRepo key={item.name} {...item} />
         ))}
-      </Flex>
-    </Box>
+      </Box>
+    </Container>
   );
 };
 

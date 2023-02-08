@@ -1,14 +1,10 @@
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import {
-  Box,
-  Button,
-  Heading,
-  IconButton,
-  Input,
-  Text,
-  useColorMode,
+  Box, Heading,
+  IconButton, useColorMode
 } from "@chakra-ui/react";
-
+import Link from "next/link";
+  
 const Header = () => {
   const { toggleColorMode, colorMode } = useColorMode();
 
@@ -31,7 +27,7 @@ const Header = () => {
       justifyContent='space-between'
       padding='0 20px'
     >
-      <Heading>GitStat</Heading>
+      <Heading><Link href='/'>GitStat</Link></Heading>
 
       <IconButton aria-label='theme-toggle' onClick={toggleColorMode}>
         {colorMode === "dark" ? <MoonIcon /> : <SunIcon />}
