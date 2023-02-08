@@ -1,18 +1,25 @@
 import client from "@/apollo/client";
 import { GET_USER_DATA } from "@/apollo/queris";
 import UserInfo from "@/components/UserInfo";
+import { IUserInfo } from "@/types";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import Head from "next/head";
 
 export default function App({
-  userData
+  userData,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-      <UserInfo user={userData} />
+    <>
+      <Head>
+        <title>{userData.login}</title>
+      </Head>
+      <UserInfo {...userData} />
+    </>
   );
 }
 
 export const getServerSideProps: GetServerSideProps<{
-  userData: any
+  userData: IUserInfo;
 }> = async () => {
   const { data } = await client.query({
     query: GET_USER_DATA,
@@ -25,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<{
 
   return {
     props: {
-      userData: data.user
+      userData: data.user,
     },
   };
 };
