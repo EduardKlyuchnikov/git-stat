@@ -1,11 +1,21 @@
 import { gql } from "@apollo/client";
 
-export const POKEMONS_WITH_TYPES = gql`
-  query MyQuery($login: String = "jorsary") {
-    user(login: $login) {
-      id
+export const GET_USER_DATA = gql`
+  query {
+    user(login: "jorsary") {
       avatarUrl
       name
+    	login
+			repositories(first: 100) {
+      totalCount
+      nodes {
+        name
+        url
+        owner {
+          login
+        }
+      }
+    }
     }
   }
 `;

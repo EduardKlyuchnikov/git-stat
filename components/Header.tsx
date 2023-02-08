@@ -18,7 +18,6 @@ const Header = () => {
       h='14'
       bgColor={"white"}
       boxShadow={"sm"}
-      pos='fixed'
       top='0'
       left='0'
       right='0'
