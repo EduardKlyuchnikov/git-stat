@@ -43,6 +43,7 @@ const Search = () => {
     onClose();
   };
 
+
   return (
     <>
       <IconButton aria-label="search" onClick={onOpen}>
@@ -83,7 +84,7 @@ const Search = () => {
 
                         <Text>{node.name}</Text>
                       </Box>
-                      s<Text>{node.location}</Text>
+                      <Text>{node.location}</Text>
                     </Box>
                   </Box>
                 </Card>
