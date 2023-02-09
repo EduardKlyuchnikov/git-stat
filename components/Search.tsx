@@ -18,13 +18,13 @@ import {
   ModalOverlay,
   Spinner,
   Text,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
 const Search = () => {
-  const [searchValue, setSearchValue] = useState("jorasry");
+  const [searchValue, setSearchValue] = useState("");
   const [debouncedValue] = useDebounce(searchValue, 500);
   const { push } = useRouter();
 
@@ -68,7 +68,7 @@ const Search = () => {
           >
             {data &&
               data.search.edges.map(({ node }) => (
-                <Card padding="10px" key={node.name}>
+                <Card padding="10px" key={node.id}>
                   <Box gap="5px" alignItems="center" display="flex">
                     <Avatar src={node.avatarUrl} />
 

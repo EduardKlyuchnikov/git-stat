@@ -7,7 +7,7 @@ export const GET_USER_DATA = gql`
       name
       login
       repositories(first: 100) {
-        totalCount
+        totalCount  
         nodes {
           updatedAt
           name
@@ -54,6 +54,7 @@ export const SEARCH_USER = gql`
       edges {
         node {
           ... on User {
+            id
             name
             avatarUrl
             login

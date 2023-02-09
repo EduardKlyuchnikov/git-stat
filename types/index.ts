@@ -52,6 +52,7 @@ export interface IFoundedUser {
           avatarUrl: string;
           login: string;
           location: string;
+          id:string
         };
       }
     ];
