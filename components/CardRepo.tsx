@@ -6,6 +6,7 @@ import {
   Card,
   CardBody,
   CardHeader,
+  Heading,
   Kbd,
   Link,
   Text,
@@ -18,6 +19,7 @@ const CardRepo = ({
   stars,
   primaryLanguage,
   updatedAt,
+  nameWithOwner,
 }: IRepositoryNode) => {
   const { push } = useRouter();
 
@@ -30,9 +32,9 @@ const CardRepo = ({
   return (
     <Card width="100%">
       <CardHeader gap="5px" display="flex" alignItems="center">
-        <Link onClick={() => navigate(name)} fontSize="2xl" width="max-content">
-          {name}
-        </Link>
+        <Text as={Link} onClick={() => navigate(name)} fontSize="2xl" width="max-content">
+          {nameWithOwner}
+        </Text>
 
         <Box display="flex" alignItems="center">
           <StarIcon />

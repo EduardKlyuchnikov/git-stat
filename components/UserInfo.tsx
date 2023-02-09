@@ -1,16 +1,15 @@
 import { IUserInfo } from "@/types";
 import { Avatar, Box, Container, Text, useMediaQuery } from "@chakra-ui/react";
-import { useEffect } from "react";
 import CardRepo from "./CardRepo";
 
 const UserInfo = ({ name, repositories, login, avatarUrl }: IUserInfo) => {
-  const isMedia = useMediaQuery("(max-width: 500px)");
+  const isMedia = useMediaQuery("(max-width: 950px)");
 
   return (
     <Container
       gap="1%"
       padding="20px 0"
-      maxWidth="70vw"
+      maxWidth={isMedia[0] ? "100vw" : "70vw"}
       display={isMedia[0] ? "block" : "flex"}
     >
       <Box display="flex" flexDirection="column" alignItems="center">

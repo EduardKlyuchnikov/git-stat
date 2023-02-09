@@ -23,11 +23,6 @@ export const getServerSideProps: GetServerSideProps<{
 }> = async () => {
   const { data } = await client.query({
     query: GET_USER_DATA,
-    context: {
-      headers: {
-        Authorization: process.env.REACT_APP_TOKEN,
-      },
-    },
   });
 
   return {

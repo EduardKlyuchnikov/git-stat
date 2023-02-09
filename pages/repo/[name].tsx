@@ -2,7 +2,7 @@ import client from "@/apollo/client";
 import { GET_REPO_DATA } from "@/apollo/queris";
 import { IPageRepo } from "@/types";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
-import { Box, Link, Text } from "@chakra-ui/react";
+import { Box, Card, Link, Text } from "@chakra-ui/react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import { FC } from "react";
@@ -40,11 +40,6 @@ export const getServerSideProps: GetServerSideProps<{
     query: GET_REPO_DATA,
     variables: {
       name: context.query.name,
-    },
-    context: {
-      headers: {
-        Authorization: process.env.REACT_APP_TOKEN,
-      },
     },
   });
 

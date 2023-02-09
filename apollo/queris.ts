@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const GET_USER_DATA = gql`
   query {
-    user(login: "jorsary") {
+    user(login: "gaearon") {
       avatarUrl
       name
       login
@@ -11,6 +11,7 @@ export const GET_USER_DATA = gql`
         nodes {
           updatedAt
           name
+          nameWithOwner
           url
           stars: stargazers {
             totalCount
@@ -27,7 +28,7 @@ export const GET_USER_DATA = gql`
 
 export const GET_REPO_DATA = gql`
   query ($name: String = "") {
-    user(login: "jorsary") {
+    user(login: "gaearon") {
       repository(name: $name) {
         name
         url
@@ -41,6 +42,23 @@ export const GET_REPO_DATA = gql`
               color
             }
             size
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const SEARCH_USER = gql`
+  query searchUser($queryString: String!) {
+    search(query: $queryString, type: USER, first: 10) {
+      edges {
+        node {
+          ... on User {
+            name
+            avatarUrl
+            login
+            location
           }
         }
       }

@@ -11,6 +11,7 @@ export interface IUserInfo {
 export interface IRepositoryNode {
   updatedAt: string;
   name: string;
+  nameWithOwner: string;
   url: string;
   stars: {
     totalCount: number;
