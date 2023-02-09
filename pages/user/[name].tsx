@@ -5,7 +5,7 @@ import { IUserInfo } from "@/types";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 
-export default function App({
+export default function User({
   userData,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
@@ -13,6 +13,7 @@ export default function App({
       <Head>
         <title>{userData.login}</title>
       </Head>
+
       <UserInfo {...userData} />
     </>
   );
@@ -20,9 +21,12 @@ export default function App({
 
 export const getServerSideProps: GetServerSideProps<{
   userData: IUserInfo;
-}> = async () => {
+}> = async (context) => {
   const { data } = await client.query({
     query: GET_USER_DATA,
+    variables: {
+      login: context.query.name,
+    },
   });
 
   return {

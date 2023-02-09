@@ -12,6 +12,7 @@ export interface IRepositoryNode {
   updatedAt: string;
   name: string;
   nameWithOwner: string;
+  owner: string;
   url: string;
   stars: {
     totalCount: number;
@@ -36,6 +37,22 @@ export interface IPageRepo {
           color: string;
         };
         size: number;
+      }
+    ];
+  };
+}
+
+export interface IFoundedUser {
+  search: {
+    userCount: number;
+    edges: [
+      {
+        node: {
+          name: string;
+          avatarUrl: string;
+          login: string;
+          location: string;
+        };
       }
     ];
   };

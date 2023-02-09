@@ -1,5 +1,6 @@
-import { SEARCH_USER } from "@/apollo/queris";
+import { SEARCH_USER } from "@/apollo/queries";
 import useDebounce from "@/hooks/useDebounce";
+import { IFoundedUser } from "@/types";
 import { useQuery } from "@apollo/client";
 import { Search2Icon } from "@chakra-ui/icons";
 import {
@@ -19,50 +20,70 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 const Search = () => {
   const [searchValue, setSearchValue] = useState("jorasry");
-
   const [debouncedValue] = useDebounce(searchValue, 500);
+  const { push } = useRouter();
 
-  const { data, loading } = useQuery(SEARCH_USER, {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { data, loading } = useQuery<IFoundedUser>(SEARCH_USER, {
     variables: {
       queryString: debouncedValue,
     },
   });
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const navigate = (pathname: string) => {
+    push({
+      pathname: `/user/${pathname}`,
+    });
+    onClose();
+  };
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <IconButton aria-label="search" onClick={onOpen}>
         <Search2Icon />
       </IconButton>
+
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
+
         <ModalContent>
           <ModalHeader>
             <Input
-              placeholder="Поиск"
+              placeholder="Поиск пользователей"
               onChange={(e) => setSearchValue(e.target.value)}
             />
           </ModalHeader>
-          <ModalBody minHeight='50px' display="flex" flexDirection="column" gap="10px">
+
+          <ModalBody
+            minHeight="50px"
+            display="flex"
+            flexDirection="column"
+            gap="10px"
+          >
             {data &&
-              data.search.edges.map((searchItem: any) => (
-                <Card padding="10px" key={searchItem.node.name}>
+              data.search.edges.map(({ node }) => (
+                <Card padding="10px" key={node.name}>
                   <Box gap="5px" alignItems="center" display="flex">
-                    <Avatar src={searchItem.node.avatarUrl} />
+                    <Avatar src={node.avatarUrl} />
+
                     <Box>
                       <Box gap="5px" display="flex">
-                        <Link color="Highlight">{searchItem.node.login}</Link>
-                        <Text>{searchItem.node.name}</Text>
+                        <Link
+                          onClick={(e) => navigate(node.login)}
+                          color="linkedin.300"
+                        >
+                          {node.login}
+                        </Link>
+
+                        <Text>{node.name}</Text>
                       </Box>
-                      <Text>{searchItem.node.location}</Text>
+                      s<Text>{node.location}</Text>
                     </Box>
                   </Box>
                 </Card>

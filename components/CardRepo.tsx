@@ -1,12 +1,10 @@
 import { IRepositoryNode } from "@/types";
 import { StarIcon } from "@chakra-ui/icons";
 import {
-  Badge,
   Box,
   Card,
   CardBody,
   CardHeader,
-  Heading,
   Kbd,
   Link,
   Text,
@@ -23,16 +21,16 @@ const CardRepo = ({
 }: IRepositoryNode) => {
   const { push } = useRouter();
 
-  const navigate = (path: string) => {
+  const navigate = () => {
     push({
-      pathname: `/repo/${path}`,
+      pathname: `/user/${nameWithOwner}`,
     });
   };
 
   return (
     <Card width="100%">
       <CardHeader gap="5px" display="flex" alignItems="center">
-        <Text as={Link} onClick={() => navigate(name)} fontSize="2xl" width="max-content">
+        <Text as={Link} onClick={() => navigate()} fontSize="2xl">
           {nameWithOwner}
         </Text>
 

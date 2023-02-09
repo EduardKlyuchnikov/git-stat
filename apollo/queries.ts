@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_USER_DATA = gql`
-  query {
-    user(login: "gaearon") {
+  query ($login: String = "Jorsary") {
+    user(login: $login) {
       avatarUrl
       name
       login
@@ -27,22 +27,20 @@ export const GET_USER_DATA = gql`
 `;
 
 export const GET_REPO_DATA = gql`
-  query ($name: String = "") {
-    user(login: "gaearon") {
-      repository(name: $name) {
-        name
-        url
-        description
-        languages(first: 100) {
-          totalSize
-          edges {
-            node {
-              id
-              name
-              color
-            }
-            size
+  query ($login: String = "Jorsary", $nameRepo: String = "landing") {
+    repository(name: $nameRepo, owner: $login) {
+      name
+      url
+      description
+      languages(first: 100) {
+        totalSize
+        edges {
+          node {
+            id
+            name
+            color
           }
+          size
         }
       }
     }
@@ -52,6 +50,7 @@ export const GET_REPO_DATA = gql`
 export const SEARCH_USER = gql`
   query searchUser($queryString: String!) {
     search(query: $queryString, type: USER, first: 10) {
+      userCount
       edges {
         node {
           ... on User {

@@ -1,5 +1,5 @@
 import client from "@/apollo/client";
-import { GET_REPO_DATA } from "@/apollo/queris";
+import { GET_REPO_DATA } from "@/apollo/queries";
 import { IPageRepo } from "@/types";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { Box, Card, Link, Text } from "@chakra-ui/react";
@@ -12,7 +12,6 @@ const Repo: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
 }) => {
   return (
     <Box
-      width="max-content"
       margin="0 auto"
       display="flex"
       flexDirection="column"
@@ -21,7 +20,9 @@ const Repo: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
       <Head>
         <title>{repoData.name}</title>
       </Head>
+
       <Text fontSize="4xl">{repoData.name}</Text>
+
       <Text fontSize="2xl">{repoData.description}</Text>
 
       <Link isExternal href={repoData.url}>
@@ -39,13 +40,14 @@ export const getServerSideProps: GetServerSideProps<{
   const { data } = await client.query({
     query: GET_REPO_DATA,
     variables: {
-      name: context.query.name,
+      nameRepo: context.query.repo,
+      login: context.query.name,
     },
   });
 
   return {
     props: {
-      repoData: data.user.repository,
+      repoData: data.repository,
     },
   };
 };
