@@ -10,27 +10,25 @@ import rehypeRaw from "rehype-raw";
 
 const Readme: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   repoData,
-}) => {
-  return (
-    <RepoLayout repoData={repoData}>
-      <Card
-        padding="1%"
-        border={"1px solid gray"}
-        borderRadius="15px"
-        display="flex"
-        flexDirection="column"
-        gap="1px"
-        overflow="hidden"
-      >
-        <ReactMarkdown rehypePlugins={[rehypeRaw]}>
-          {repoData.readme
-            ? repoData.readme.text
-            : "У данного репозитория описания"}
-        </ReactMarkdown>
-      </Card>
-    </RepoLayout>
-  );
-};
+}) => (
+  <RepoLayout repoData={repoData}>
+    <Card
+      padding="1%"
+      border={"1px solid gray"}
+      borderRadius="15px"
+      display="flex"
+      flexDirection="column"
+      gap="1px"
+      overflow="hidden"
+    >
+      <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+        {repoData.readme
+          ? repoData.readme.text
+          : "У данного репозитория описания"}
+      </ReactMarkdown>
+    </Card>
+  </RepoLayout>
+);
 
 export default Readme;
 

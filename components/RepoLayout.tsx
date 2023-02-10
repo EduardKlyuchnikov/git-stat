@@ -46,7 +46,7 @@ const RepoLayout = ({ children, repoData }: IRepoLayoutProps) => {
               navigate("/");
             }}
           >
-            Code
+            Info
           </Button>
 
           <Button
