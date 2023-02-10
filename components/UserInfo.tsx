@@ -4,7 +4,7 @@ import CardRepo from "./CardRepo";
 
 const UserInfo = ({ name, repositories, login, avatarUrl }: IUserInfo) => {
   const isMedia = useMediaQuery("(max-width: 950px)");
-  
+
   return (
     <Container
       gap="1%"
@@ -20,14 +20,15 @@ const UserInfo = ({ name, repositories, login, avatarUrl }: IUserInfo) => {
 
       <Box
         display="flex"
-        flexDirection="column"
+        flexDirection="column-reverse"
         alignItems="center"
         gap="5"
         width="100%"
       >
-        {repositories && repositories.nodes.map((item) => (
-          <CardRepo key={item.nameWithOwner} {...item} />
-        ))}
+        {repositories &&
+          repositories.nodes.map((item) => (
+            <CardRepo key={item.nameWithOwner} {...item} />
+          ))}
       </Box>
     </Container>
   );

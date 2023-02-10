@@ -27,6 +27,10 @@ export interface IPageRepo {
   name: string;
   url: string;
   description: string;
+  nameWithOwner: string;
+  readme: {
+    text: string;
+  };
   languages: {
     totalSize: number;
     edges: [
@@ -52,9 +56,19 @@ export interface IFoundedUser {
           avatarUrl: string;
           login: string;
           location: string;
-          id:string
+          id: string;
         };
       }
     ];
   };
+}
+
+export interface IPullIssues {
+  title: string;
+  html_url: string;
+  number: number;
+  user: {
+    login: string;
+  };
+  created_at: string;
 }

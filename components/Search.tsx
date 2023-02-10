@@ -18,7 +18,7 @@ import {
   ModalOverlay,
   Spinner,
   Text,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -42,7 +42,6 @@ const Search = () => {
     });
     onClose();
   };
-
 
   return (
     <>
