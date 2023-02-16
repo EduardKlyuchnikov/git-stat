@@ -13,7 +13,6 @@ import moment from "moment";
 import { useRouter } from "next/router";
 
 const CardRepo = ({
-  name,
   stars,
   primaryLanguage,
   updatedAt,

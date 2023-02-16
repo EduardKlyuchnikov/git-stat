@@ -1,13 +1,13 @@
 import { gql } from "@apollo/client";
 
 export const GET_USER_DATA = gql`
-  query ($login: String = "Jorsary") {
+  query ($login: String = "EduardKlyuchnikov") {
     user(login: $login) {
       avatarUrl
       name
       login
       repositories(first: 100) {
-        totalCount  
+        totalCount
         nodes {
           updatedAt
           name
@@ -27,11 +27,17 @@ export const GET_USER_DATA = gql`
 `;
 
 export const GET_REPO_DATA = gql`
-  query ($login: String = "Jorsary", $nameRepo: String = "landing") {
+  query ($login: String = "EduardKlyuchnikov", $nameRepo: String = "git-stat") {
     repository(name: $nameRepo, owner: $login) {
       name
       url
       description
+      nameWithOwner
+      readme: object(expression: "HEAD:README.md") {
+        ... on Blob {
+          text
+        }
+      }
       languages(first: 100) {
         totalSize
         edges {
@@ -50,9 +56,15 @@ export const GET_REPO_DATA = gql`
 export const SEARCH_USER = gql`
   query searchUser($queryString: String!) {
     search(query: $queryString, type: USER, first: 10) {
-      userCount
       edges {
         node {
+          ... on Organization {
+            id
+            name
+            avatarUrl
+            login
+            location
+          }
           ... on User {
             id
             name

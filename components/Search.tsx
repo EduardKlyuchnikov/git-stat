@@ -18,7 +18,7 @@ import {
   ModalOverlay,
   Spinner,
   Text,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -83,7 +83,7 @@ const Search = () => {
 
                         <Text>{node.name}</Text>
                       </Box>
-                      s<Text>{node.location}</Text>
+                      <Text>{node.location}</Text>
                     </Box>
                   </Box>
                 </Card>
